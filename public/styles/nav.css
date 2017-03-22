@@ -1,0 +1,32 @@
+#nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 100vw;
+  background-color: #00a087;
+  color: #e8fdff;
+  padding-left: 2em;
+  padding-right: 2em;
+  z-index: 1;
+}
+
+#nav-bar .logo {
+  height: 80px;
+  width: 80px;
+  float: left;
+}
+
+#nav-bar .header {
+  float: left;
+  font-size: 200%;
+  margin-left: 10px;
+  line-height: 2.5;
+}
+
+#nav-bar .compose-button {
+  float: right;
+  line-height: 1.75;
+  color: black;
+  cursor: pointer;
+}
