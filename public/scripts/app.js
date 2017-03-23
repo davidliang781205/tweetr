@@ -11,30 +11,47 @@ function escape(str) {
 }
 
 function timeSince(date) {
-  var seconds = Math.floor((new Date() - date) / 1000);
-  var interval = Math.floor(seconds / 31536000);
+  if (typeof date !== 'object') {
+    date = new Date(date);
+  }
 
-  if (interval > 1) {
-    return interval + " years";
+  var seconds = Math.floor((new Date() - date) / 1000);
+  var intervalType;
+
+  var interval = Math.floor(seconds / 31536000);
+  if (interval >= 1) {
+    intervalType = 'year';
+  } else {
+    interval = Math.floor(seconds / 2592000);
+    if (interval >= 1) {
+      intervalType = 'month';
+    } else {
+      interval = Math.floor(seconds / 86400);
+      if (interval >= 1) {
+        intervalType = 'day';
+      } else {
+        interval = Math.floor(seconds / 3600);
+        if (interval >= 1) {
+          intervalType = "hour";
+        } else {
+          interval = Math.floor(seconds / 60);
+          if (interval >= 1) {
+            intervalType = "minute";
+          } else {
+            interval = seconds;
+            intervalType = "second";
+          }
+        }
+      }
+    }
   }
-  interval = Math.floor(seconds / 2592000);
-  if (interval > 1) {
-    return interval + " months";
+
+  if (interval > 1 || interval === 0) {
+    intervalType += 's';
   }
-  interval = Math.floor(seconds / 86400);
-  if (interval > 1) {
-    return interval + " days";
-  }
-  interval = Math.floor(seconds / 3600);
-  if (interval > 1) {
-    return interval + " hours";
-  }
-  interval = Math.floor(seconds / 60);
-  if (interval > 1) {
-    return interval + " minutes";
-  }
-  return Math.floor(seconds) + " seconds";
-}
+
+  return interval + ' ' + intervalType;
+};
 
 function createTweetElement(data) {
   let avatar = data['user']['avatars']['small'];
@@ -59,7 +76,7 @@ function createTweetElement(data) {
 
   // Create footer area for tweet
   let $footer = $('<footer>');
-  $footer.append($('<div>').addClass('footer-left').text(escape(timeCreated)));
+  $footer.append($('<div>').addClass('footer-left').text(escape(timeCreated) + ' ago'));
   let $icons = $('<div>').addClass('footer-icons');
   ['flag', 'retweet', 'heart'].forEach(function(item) {
     $icons.append($('<i>').addClass("fa").addClass("fa-" + item));
