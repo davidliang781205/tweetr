@@ -8,22 +8,17 @@ module.exports = function makeDataHelpers(db) {
 
     // Saves a tweet to `MongoDB`
     saveTweet: function(newTweet, callback) {
-      simulateDelay(() => {
-        db.collection("tweeter").push(newTweet);
-        callback(null, true);
-      });
+      db.collection("tweeter").insertOne(newTweet);
+      callback(null, true);
     },
-
     // Get all tweets in `MongoDB`, sorted by newest first
-    getTweets: function(callback){
-
-                db.collection("tweeter").find().toArray((err, tweets) => {
-                  if (err) {
-                    return callback(err);
-                  }
-                  console.log(tweets);
-                  callback(null, tweets);
-                });
+    getTweets: function(callback) {
+      db.collection("tweeter").find().toArray((err, tweets) => {
+        if (err) {
+          return callback(err);
+        }
+        callback(null, tweets);
+      });
     }
   };
 }
