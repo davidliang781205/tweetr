@@ -101,7 +101,7 @@ $(function() {
     event.preventDefault();
     let textInput = $(this).find('textarea');
 
-    if (!textInput.val()) {
+    if (!$.trim(textInput.val())) {
       $('.error-message').text("Tweet is empty.").slideDown(function() {
         setTimeout(function() {
           $('.error-message').slideUp();
