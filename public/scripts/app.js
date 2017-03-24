@@ -67,9 +67,11 @@ function createTweetElement(data) {
 
   // Create header area for tweet
   let $header = $('<header>');
-  $header.append($('<div>').addClass('avatar').append($('<img>').addClass('avatar-img').attr('src', escape(avatar))));
+  $header.append($('<div>').addClass('avatar')
+    .append($('<img>').addClass('avatar-img').attr('src', escape(avatar))));
   let $headerText = $('<div>').addClass('header-text');
-  $headerText.append($('<div>').addClass('username').text(escape(username))).append($('<div>').addClass('handle').text(escape(handle)));
+  $headerText.append($('<div>').addClass('username').text(escape(username)))
+    .append($('<div>').addClass('handle').text(escape(handle)));
   $header.append($headerText);
 
   // Create main content area for tweet
@@ -86,7 +88,9 @@ function createTweetElement(data) {
   $footer.append($icons);
 
   // Append to article
-  $tweet.append($header).append($body).append($footer);
+  $tweet.append($header)
+    .append($body)
+    .append($footer);
 
   return $tweet;
 }
