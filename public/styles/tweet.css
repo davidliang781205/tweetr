@@ -25,7 +25,7 @@
 .tweet .tweet-body {
   background-color: #FFFFFF;
   padding: 20px 8px;
-  word-wrap: break-word
+  word-wrap: break-word;
 }
 
 .tweet footer {
@@ -52,12 +52,16 @@
 }
 
 .footer-icons i {
-  margin-left: 15px;
+  margin: 0 0.75em;
 }
 
 .tweet:hover .footer-icons {
   visibility: visible;
   opacity: 1;
+}
+
+.footer-icons .heartCount {
+  float: right;
 }
 
 .tweet {

@@ -59,6 +59,7 @@ function createTweetElement(data) {
   let handle = data['user']['handle'];
   let content = data['content']['text'];
   let timeCreated = timeSince(data['created_at']);
+  let heartCount = data['heart'];
   let tweetContainer = $('.tweet');
 
   // Create article tag for tweet
@@ -81,6 +82,7 @@ function createTweetElement(data) {
   ['flag', 'retweet', 'heart'].forEach(function(item) {
     $icons.append($('<i>').addClass("fa").addClass("fa-" + item));
   });
+
   $footer.append($icons);
 
   // Append to article
