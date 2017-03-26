@@ -48,3 +48,9 @@ main {
   margin: 2em;
   padding: 10px;
 }
+
+@media (max-width: 600px) {
+  main {
+    width: 100%;
+  }
+}
