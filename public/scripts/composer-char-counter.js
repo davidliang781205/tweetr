@@ -1,12 +1,14 @@
 $(document).ready(function() {
-  $('.new-tweet textarea').on("keyup", function() {
-    var length = $(this).val().length;
-    length = 140 - length;
-    if (length < 0) {
-      $(this).siblings('span').css("color", "red");
+  const charLimit = 140;
+  $('.new-tweet textarea').on('input', function() {
+    let $length = $(this).val().length;
+    let $charCount = $(this).siblings('span');
+    $length = charLimit - $length;
+    if ($length < 0) {
+      $charCount.css("color", "red");
     } else {
-      $(this).siblings('span').css("color", "#244751");
+      $charCount.css("color", "#244751");
     }
-    $(this).siblings('span').text(length);
+    $charCount.text($length);
   });
 });

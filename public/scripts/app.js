@@ -46,6 +46,7 @@ function timeSince(date) {
     }
   }
 
+  // Make plural if necessary
   if (interval > 1 || interval === 0) {
     intervalType += 's';
   }
@@ -106,9 +107,7 @@ function loadTweets() {
   $.ajax({
     method: 'GET',
     url: '/tweets'
-  }).done(function(tweets) {
-    renderTweets(tweets);
-  });
+  }).done(renderTweets);
 }
 
 // Document load jQuery
@@ -123,15 +122,15 @@ $(function() {
   $('.new-tweet form').submit(() => {
     event.preventDefault();
     let textInput = $(this).find('textarea');
+    let errorMessage;
 
     if (!$.trim(textInput.val())) {
-      $('.error-message').text("Tweet is empty.").slideDown(function() {
-        setTimeout(function() {
-          $('.error-message').slideUp();
-        }, 2000);
-      });
+      errorMessage = "Tweet is empty";
     } else if (textInput.val().length > 140) {
-      $('.error-message').text("Tweet exceeds max characters.").slideDown(function() {
+      errorMessage = "Tweet exceeds max characters";
+    }
+    if (errorMessage) {
+      $('.error-message').text(errorMessage).slideDown(function() {
         setTimeout(function() {
           $('.error-message').slideUp();
         }, 2000);
